@@ -79,32 +79,30 @@ var renderQuiz = function(state, ansElement, qElement, results) {
 
 console.log(state.answers[0]);
 
-
-
-$(document).on("click", "#enterans", function(event){
-  event.preventDefault();
-  if(state.i <4){
-    if($('input[name=options]:checked').val()===state.answers[state.i][0]){
+function correctAns(){
       state.i++;
       state.rightAns++
-      renderQuiz(state, $('.test'), $(".quiz"), $(".results"));
+     
       toastr.success(state.correct[state.i]);
-
-    }
-
-    else{
-      state.i++;
-      renderQuiz(state, $('.test'), $(".quiz"), $(".results"));
+}
+function insultAns() {
+   state.i++;
+      
       toastr.error(state.insults[state.i]);
-    }
-  }
+}
+$(document).on("click", "#enterans", function(event){
+  event.preventDefault();
+  if($('input[name=options]:checked').val()===state.answers[state.i][0]) 
+     correctAns(); 
+     else insultAns();
+    
 
-  else{
+  if (state.i >= 5){
     $(".quiz").html("");
     $(".results").html("");
     $('.test').html("You got "+ state.rightAns +" out of 5 right");
   }
-
+    else{renderQuiz(state, $('.test'), $(".quiz"), $(".results"));}
 
 
 });
