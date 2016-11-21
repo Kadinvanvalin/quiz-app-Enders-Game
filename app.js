@@ -70,7 +70,7 @@ var renderQuiz = function(state, ansElement, qElement, results) {
 
  });
   qElement.html(state.questions[state.i]);
-  ansElement.html(itemsHTML +'<button id="enterans" type="submit">submit</button>');
+  ansElement.html(itemsHTML +'<div class="text-center"><button id="enterans" type="submit">submit</button><button id="reset" type="submit">restart quiz</button></div>');
   results.html("You are on question" + (state.i+1)  + "of 5");
 
 };
@@ -90,6 +90,9 @@ function insultAns() {
       
       toastr.error(state.insults[state.i]);
 }
+$(document).on("click", "#reset", function(event){
+location.reload();
+});
 $(document).on("click", "#enterans", function(event){
   event.preventDefault();
   if($('input[name=options]:checked').val()===state.answers[state.i][0]) 
@@ -100,7 +103,7 @@ $(document).on("click", "#enterans", function(event){
   if (state.i >= 5){
     $(".quiz").html("");
     $(".results").html("");
-    $('.test').html("You got "+ state.rightAns +" out of 5 right");
+    $('.test').html("You got "+ state.rightAns +" out of 5 right  <button id='reset' type='submit'>restart quiz</button>");
   }
     else{renderQuiz(state, $('.test'), $(".quiz"), $(".results"));}
 
@@ -108,13 +111,6 @@ $(document).on("click", "#enterans", function(event){
 });
 
 
-// $('.submit').click(function(event) {
-// //    event.preventDefault();
-//   state.i++;
-//    renderQuiz(state, $('.test'),$(".questions"));
-//    console.log(state);
-
-// });    
 
 
 
