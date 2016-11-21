@@ -79,7 +79,7 @@ $("#js-quiz").click(function(event){
 
 };
 
-toastr.success("MILK, yum");
+
     renderQuiz(state, $('.test'), $(".quiz"), $(".results"));
      
   console.log(state.answers[0]);
@@ -93,16 +93,14 @@ toastr.success("MILK, yum");
             state.i++;
             state.rightAns++
             renderQuiz(state, $('.test'), $(".quiz"), $(".results"));
-            $("#myModal").css("display", "block");
-            $(".questionResult").html(state.correct[state.i])
+                      toastr.success(state.correct[state.i]);
 
         }
      
          else{
             state.i++;
             renderQuiz(state, $('.test'), $(".quiz"), $(".results"));
-            $("#myModal").css("display", "block");
-            $(".questionResult").html(state.insults[state.i])
+            toastr.error(state.insults[state.i]);
         }
       }
       
