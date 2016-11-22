@@ -14,8 +14,8 @@ $(function() {
     ],
     i:0,
     rightAns:0,
-    insults:["incorrect: What are you a bugger?", "incorrect: well thats just stupid", "incorrect: did you even read the book?!", "incorrect: well thats just stupid", "incorrect: did you even read the book?!"],
-    correct: ["correct: What are you Bean?"," correct: what are you a third?"," correct: thats just luck"," correct: what are you a third?"," correct: thats just luck"]
+    insults:["incorrect: What are you a bugger?", "incorrect: well thats just stupid", "incorrect: did you even read the book?!", "incorrect: well thats just stupid", "incorrect: did you even read the book?!","incorrect: What are you a bugger?"],
+    correct: ["correct: What are you Bean?"," correct: what are you a third?"," correct: thats just luck"," correct: what are you a third?"," correct: thats just luck"," correct: thats just luck"]
 
 
   }; 
@@ -66,11 +66,11 @@ $("#js-quiz").click(function(event){
 var renderQuiz = function(state, ansElement, qElement, results) {
 
   var itemsHTML = shuffle(state.answers[state.i].slice()).map(function(answers) {
-   return '<input type="radio" name="options"  value="'+ answers + '" class="">'+ answers +'</input>';
+   return '<li><input type="radio" name="options" value="'+ answers + '" class="">'+ answers +'</input></li>';
 
  });
   qElement.html(state.questions[state.i]);
-  ansElement.html(itemsHTML +'<div class="text-center"><button id="enterans" type="submit">submit</button><button id="reset" type="submit">restart quiz</button></div>');
+  ansElement.html('<ul>'+itemsHTML +'</ul><div class="text-center"><button id="enterans" type="submit">submit</button><button id="reset" type="submit">restart</button></div>');
   results.html("You are on question" + (state.i+1)  + "of 5");
 
 };
@@ -95,15 +95,18 @@ location.reload();
 });
 $(document).on("click", "#enterans", function(event){
   event.preventDefault();
+  if($('input[name=options]:checked').val()){
   if($('input[name=options]:checked').val()===state.answers[state.i][0]) 
      correctAns(); 
-     else insultAns();
+     else insultAns();}
+
+     else toastr.warning("Hey, answer the question!"); 
     
 
   if (state.i >= 5){
     $(".quiz").html("");
     $(".results").html("");
-    $('.test').html("You got "+ state.rightAns +" out of 5 right  <button id='reset' type='submit'>restart quiz</button>");
+    $('.test').html("You got "+ state.rightAns +" out of 5 right  <button id='reset' type='submit'>restart</button>");
   }
     else{renderQuiz(state, $('.test'), $(".quiz"), $(".results"));}
 
