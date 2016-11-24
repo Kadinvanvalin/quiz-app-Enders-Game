@@ -58,19 +58,19 @@ $(function() {
 $("#js-quiz").click(function(event){
   event.preventDefault();
   $(".focal").toggleClass("hidden");
-  renderQuiz(state, $('.test'), $(".quiz"), $(".results"));
+  renderQuiz(state, $('.quiz'), $(".answers"), $(".results"));
 });
 
 
 
-var renderQuiz = function(state, ansElement, qElement, results) {
+var renderQuiz = function(state, qElement, ansElement, results) {
 
-  var itemsHTML = shuffle(state.answers[state.i].slice()).map(function(answers) {
-   return '<li><input type="radio" name="options" value="'+ answers + '" class="">'+ answers +'</input></li>';
+  var itemsHTML = shuffle(state.answers[state.i].slice()).map(function(answers) { 
+   return '<li><label class="btn btn-primary"><input type="radio" name="options" value="'+ answers + '">'+ answers +'</label></li>';
 
  });
   qElement.html(state.questions[state.i]);
-  ansElement.html('<ul>'+itemsHTML +'</ul><div class="text-center"><button id="enterans" type="submit">submit</button><button id="reset" type="submit">restart</button></div>');
+  ansElement.html('<ul class="btn-group" data-toggle="buttons">'+ itemsHTML.join("") +'</ul><div class="text-center"><button id="enterans" type="submit">submit</button><button id="reset" type="submit">restart</button></div>');
   results.html("You are on question" + (state.i+1)  + "of 5");
 
 };
@@ -93,6 +93,17 @@ function insultAns() {
 $(document).on("click", "#reset", function(event){
 location.reload();
 });
+
+
+$(document).on("click", "label", function(event){
+$(this).toggleClass("js-select");
+
+
+});
+
+
+
+
 $(document).on("click", "#enterans", function(event){
   event.preventDefault();
   if($('input[name=options]:checked').val()){
@@ -106,9 +117,9 @@ $(document).on("click", "#enterans", function(event){
   if (state.i >= 5){
     $(".quiz").html("");
     $(".results").html("");
-    $('.test').html("You got "+ state.rightAns +" out of 5 right  <button id='reset' type='submit'>restart</button>");
+    $('.answers').html("You got "+ state.rightAns +" out of 5 right  <button id='reset' type='submit'>restart</button>");
   }
-    else{renderQuiz(state, $('.test'), $(".quiz"), $(".results"));}
+    else{renderQuiz(state, $('.quiz'), $(".answers"), $(".results"));}
 
 
 });

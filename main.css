@@ -8,6 +8,10 @@ body{font-family: 'Bungee Inline', cursive;
     margin: 0 auto;
     padding: 0 10px;
     background-color: grey;
+    border: 1px solid black;
+    border-bottom-width: 10px;
+    border-radius: 5px;
+    border-bottom-radius: 10px;
 }
 .content {
     position: relative;
@@ -15,11 +19,12 @@ body{font-family: 'Bungee Inline', cursive;
     padding: 20px;
     margin: 50px auto;
     background-color: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid black;
     border-bottom-width: 10px;
     border-radius: 5px;
     border-bottom-radius: 10px;
     overflow: hidden;
+    font-size:40px;
 }
 .hidden{
 	visibility: hidden;
@@ -43,9 +48,59 @@ button {
     font-size: 13px;
     font-weight: bold;
     display: inline-block;
+    border: 1px solid black;
+    border-bottom-width: 10px;
+    border-radius: 5px;
+    border-bottom-radius: 10px;
 }
-.quiz{
+.answers{
 	margin: 50px;
 
 }
-li{ list-style: none; }
+
+ul {
+     list-style-type:none;
+     margin:25px 0 0 0;
+     padding:0;
+}
+
+li{
+display: inline-block;
+	width: 50%;
+}
+
+input[type="radio"] {
+ opacity: 0;
+}
+
+label{ padding:  5px ;
+		margin-top: 10px;
+    text-align: center;
+    
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    height: 70px;
+    width: 90%;
+   font-family: 'Bungee Inline', cursive;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+	border: 1px solid black;
+    border-bottom-width: 10px;
+    border-radius: 5px;
+    border-bottom-radius: 10px;
+    }
+    label:hover{
+	background-color: orange;
+	
+}
+label:active{
+	background-color: red;
+}
+.js-select{
+background-color: purple;
+
+}
+button:active{
+	background-color: red;
+}
